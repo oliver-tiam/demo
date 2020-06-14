@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico"/>
+    <title th:text="${title}"></title>
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+<body>
+<div class="container">
+    <div class="col-md-8 col-sm-10 mx-auto text-center form p-4">
+        <div class="px-2">
+            <h1 th:text="${title}"></h1>
+            <br/>
+            <form action="#" class="justify-content-center" th:action="@{/save}" th:object="${employee}" method="post">
+
+                <div class="form-group row" th:if="${title == 'Edit Employee Record'}">
+                    <label for="empId" class="col-sm-2 col-form-label">Employee ID:</label>
+                    <div class="col-sm-4">
+                        <input type="text"  th:field="*{id}"  class="form-control" id="empId" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empFirstName" class="col-sm-2 col-form-label">First Name:</label>
+                    <div class="col-sm-4">
+                        <input sec:authorize="hasAuthority('ADMIN')" type="text"  th:field="*{firstName}"  class="form-control" id="empFirstName" placeholder="First Name" >
+                        <input sec:authorize="hasAuthority('USER')" type="text"  th:field="*{firstName}"   class="form-control" id="empFirstName" placeholder="First Name"  disabled>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empMiddleName" class="col-sm-2 col-form-label">Middle Name:</label>
+                    <div class="col-sm-4">
+                        <input sec:authorize="hasAuthority('ADMIN')" type="text"  th:field="*{middleName}"  class="form-control" id="empMiddleName" placeholder="Middle Name" >
+                        <input sec:authorize="hasAuthority('USER')" type="text"  th:field="*{middleName}"   class="form-control" id="empMiddleName" placeholder="Middle Name"  disabled>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empLastName" class="col-sm-2 col-form-label">Last Name:</label>
+                    <div class="col-sm-4">
+                        <input sec:authorize="hasAuthority('ADMIN')" type="text"  th:field="*{lastName}"  class="form-control" id="empLastName" placeholder="Last Name" >
+                        <input sec:authorize="hasAuthority('USER')" type="text"  th:field="*{lastName}"   class="form-control" id="empLastName" placeholder="Last Name"  disabled>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empBirthDate" class="col-sm-2 col-form-label">Birth Date:</label>
+                    <div class="col-sm-4">
+                        <input sec:authorize="hasAuthority('ADMIN')" type="text"  th:field="*{birthDate}"  class="form-control" id="empBirthDate" placeholder="YYYY-MM-DD" >
+                        <input sec:authorize="hasAuthority('USER')" type="text"  th:field="*{birthDate}"   class="form-control" id="empBirthDate" placeholder="YYYY-MM-DD"  disabled>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empGender" class="col-sm-2 col-form-label">Gender:</label>
+                    <div class="col-sm-4">
+                        <select sec:authorize="hasAuthority('ADMIN')" th:field="*{gender}"  class="form-control" id="empGender">
+                            <option value="">Select</option>
+                            <option th:value='M'>Male</option>
+                            <option th:value='F'>Female</option>
+                        </select>
+                        <select sec:authorize="hasAuthority('USER')" th:field="*{gender}" class="form-control" id="empGender" disabled>
+                            <option value="">Select</option>
+                            <option value='M'>Male</option>
+                            <option value='F'>Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empMaritalStatus" class="col-sm-2 col-form-label">Marital Status:</label>
+                    <div class="col-sm-4">
+                        <select sec:authorize="hasAuthority('ADMIN')" th:field="*{maritalStatus}"  class="form-control" id="empMaritalStatus">
+                            <option value="">Select</option>
+                            <option th:value='Married'>Married</option>
+                            <option th:value='Single'>Single</option>
+                            <option th:value='Divorced'>Divorced</option>
+                            <option th:value='Widow'>Widow</option>
+                        </select>
+                        <select sec:authorize="hasAuthority('USER')" th:field="*{maritalStatus}" class="form-control" id="empMaritalStatus" disabled>
+                            <option value="">Select</option>
+                            <option th:value='Married'>Married</option>
+                            <option th:value='Single'>Single</option>
+                            <option th:value='Divorced'>Divorced</option>
+                            <option th:value='Widow'>Widow</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empPosition" class="col-sm-2 col-form-label">Position:</label>
+                    <div class="col-sm-4">
+                        <input sec:authorize="hasAuthority('ADMIN')" type="text"  th:field="*{position}"  class="form-control" id="empPosition" placeholder="Position" >
+                        <input sec:authorize="hasAuthority('USER')" type="text"  th:field="*{position}"   class="form-control" id="empPosition" placeholder="Position"  disabled>
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+                    <label for="empDateHired" class="col-sm-2 col-form-label">Date Hired:</label>
+                    <div class="col-sm-4">
+                        <input sec:authorize="hasAuthority('ADMIN')" type="text"  th:field="*{dateHired}"  class="form-control" id="empDateHired" placeholder="YYYY-MM-DD" >
+                        <input sec:authorize="hasAuthority('USER')" type="text"  th:field="*{dateHired}"   class="form-control" id="empDateHired" placeholder="YYYY-MM-DD"  disabled>
+                    </div>
+                </div>
+                <div class="form-group row" >
+                    <div class="col-sm-4" align="right">
+                        <button  class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')" type="submit">Save</button>
+                        <button  class="btn btn-primary" type="button" onClick="history.go(-1);">Back</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+
+        </div>
+
+</div>
+</body>
+</html>
