@@ -26,7 +26,7 @@ Due to time constraint
 For Contact Infos:
    CREATE TABLE `contact_info` (
   `contact_info_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `value` varchar(45),
   `flag` boolean  --- flag indicator for primary contact to appear in the list of employees
   PRIMARY KEY (`contact_info_id`)
    FOREIGN KEY (emp_id)
@@ -36,7 +36,12 @@ For Contact Infos:
 For Address Info
  CREATE TABLE `address_info` (
   `address_info_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `address1` varchar(100),
+  `address2` varchar(100),
+  `city` varchar(100),
+  `state` varchar(100),
+  `zip` varchar(5),
+  `country` varchar(100) NOT NULL,
   `flag` boolean  --- flag indicator for primary address to appear in the list of employees
   PRIMARY KEY (`address_info_id`)
    FOREIGN KEY (emp_id)
